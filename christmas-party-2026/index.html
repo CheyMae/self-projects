@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Christmas Party 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700&family=Pinyon+Script&display=swap">
+<style>
+/* Layout: one invitation column, alternating olive and burgundy bands, a swaying parol lantern over the hero.
+   Single deliberate look (a printed invitation), so no light/dark switch. */
+:root {
+  --olive-deep: #1c2314;
+  --olive: #2f3a1f;
+  --olive-soft: #8f9e60;
+  --burgundy: #5e1526;
+  --burgundy-bright: #a52f4b;
+  --gold: #d1b06a;
+  --champagne: #f1e6cd;
+  --muted: #bdb69b;
+  --line: rgba(209, 176, 106, .28);
+  --wine: #722F37;
+  --olive-dress: #636B2F;
+  --gold-dress: #B59410;
+
+  --display: "Gloock", "Bodoni 72", "Didot", Georgia, serif;
+  --script: "Pinyon Script", "Edwardian Script ITC", "Snell Roundhand", "Gloock", Georgia, serif;
+  --body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+
+  --col: 680px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--olive-deep);
+  color: var(--champagne);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.band {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: clamp(56px, 10vw, 104px);
+  position: relative;
+}
+.wrap { max-width: var(--col); margin-inline: auto; position: relative; }
+.band.burgundy { background: var(--burgundy); }
+.band.olive { background: var(--olive); }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; line-height: 1.05; }
+p { margin: 0; }
+.eyebrow {
+  font-family: var(--body); font-weight: 600; font-size: 13px;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 12px;
+}
+.eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.script { font-family: var(--script); color: var(--gold); line-height: 1; }
+
+/* ---------- Hero ---------- */
+.hero {
+  text-align: center;
+  padding-block: clamp(28px, 6vw, 56px) clamp(56px, 9vw, 96px);
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 18%, rgba(165, 47, 75, .38), transparent 70%),
+    radial-gradient(ellipse 90% 60% at 50% 110%, rgba(143, 158, 96, .18), transparent 70%),
+    var(--olive-deep);
+}
+.parol-btn {
+  display: block; margin: 0 auto; background: none; border: 0; padding: 0; cursor: pointer;
+  width: clamp(120px, 26vw, 168px); color: inherit;
+}
+.parol-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; border-radius: 12px; }
+.parol { width: 100%; height: auto; overflow: visible; transform-origin: 50% 0; animation: sway 6s ease-in-out infinite; }
+.parol .glow { animation: glow 3.2s ease-in-out infinite; transform-origin: 100px 100px; }
+.parol .tail { transform-box: fill-box; transform-origin: 50% 0; animation: tail 3.4s ease-in-out infinite; }
+.parol .tail:nth-of-type(2) { animation-delay: -.8s; }
+.parol .tail:nth-of-type(3) { animation-delay: -1.6s; }
+@keyframes sway { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@keyframes glow { 0%,100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+@keyframes tail { 0%,100% { transform: rotate(4deg); } 50% { transform: rotate(-4deg); } }
+
+.hero .invited { font-size: clamp(34px, 7vw, 50px); margin-top: 10px; }
+.hero h1 {
+  font-size: clamp(54px, 14vw, 116px);
+  letter-spacing: -.01em;
+  margin-top: 4px;
+  color: var(--champagne);
+}
+.hero h1 em { font-style: normal; color: var(--burgundy-bright); text-shadow: 0 0 40px rgba(165,47,75,.45); }
+.hero .when {
+  margin-top: 22px;
+  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px;
+  font-weight: 600; font-size: clamp(15px, 3.6vw, 18px); letter-spacing: .06em; text-transform: uppercase;
+}
+.hero .when span + span::before { content: "✦"; color: var(--gold); margin-right: 18px; font-size: .8em; }
+
+/* ---------- Countdown ---------- */
+.countdown { margin-top: 40px; }
+.countdown .label { font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.clock {
+  margin: 14px auto 0;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(8px, 2vw, 16px);
+  max-width: 560px;
+}
+.unit {
+  background: linear-gradient(180deg, var(--burgundy) 0%, #4a0f1d 100%);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(12px, 3vw, 20px) 4px clamp(10px, 2.4vw, 16px);
+  box-shadow: 0 18px 40px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.06);
+  overflow: hidden;
+}
+.num {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(34px, 9vw, 64px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--champagne);
+}
+.num.flip { animation: flip .5s cubic-bezier(.2,.8,.2,1); }
+@keyframes flip { from { transform: translateY(-40%); opacity: 0; } to { transform: none; opacity: 1; } }
+.unit small { display: block; margin-top: 6px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.party-now { margin-top: 14px; font-family: var(--display); font-size: clamp(30px, 7vw, 48px); color: var(--gold); }
+
+.hero-actions { margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.btn {
+  font: 600 15px/1 var(--body); letter-spacing: .04em;
+  padding: 14px 22px; border-radius: 999px; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: transform .2s, background-color .2s, color .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.btn.primary { background: var(--gold); color: var(--olive-deep); border: 1px solid var(--gold); }
+.btn.ghost { background: transparent; color: var(--champagne); border: 1px solid var(--line); }
+.btn.ghost:hover { border-color: var(--gold); }
+.scroll-hint { margin-top: 36px; font-size: 13px; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; }
+.scroll-hint span { display: inline-block; animation: bob 2s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+/* ---------- What ---------- */
+.what h2 { font-size: clamp(44px, 10vw, 80px); margin-top: 18px; }
+.what .lede { margin-top: 18px; font-size: clamp(17px, 2.6vw, 20px); color: var(--muted); max-width: 52ch; }
+.facts { margin-top: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.fact { background: var(--olive); padding: 20px 22px; min-width: 0; }
+.fact dt { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.fact dd { margin: 6px 0 0; font-family: var(--display); font-size: clamp(22px, 4vw, 28px); line-height: 1.15; }
+
+/* ---------- Where ---------- */
+.where h2 { font-size: clamp(40px, 9vw, 72px); margin-top: 18px; }
+.where .lede { margin-top: 14px; color: rgba(241,230,205,.82); max-width: 52ch; }
+.options { margin-top: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.option {
+  background: rgba(28, 35, 20, .55);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 26px 24px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  min-width: 0;
+  transition: transform .3s, border-color .3s;
+}
+.option:hover { transform: translateY(-4px); border-color: var(--gold); }
+.option .tag {
+  align-self: flex-start;
+  font: 700 12px/1 var(--body); letter-spacing: .2em; text-transform: uppercase;
+  padding: 8px 12px; border-radius: 999px; background: var(--gold); color: var(--olive-deep);
+}
+.option h3 { font-size: clamp(28px, 5vw, 34px); }
+.option p { color: rgba(241,230,205,.8); }
+.route { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 0; }
+.route li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; position: relative; padding-bottom: 14px; }
+.route li:last-child { padding-bottom: 0; }
+.route li::before {
+  content: ""; width: 12px; height: 12px; margin: 6px 5px 0; border-radius: 50%;
+  background: var(--gold); box-shadow: 0 0 0 4px rgba(209,176,106,.2);
+}
+.route li:not(:last-child)::after {
+  content: ""; position: absolute; left: 10px; top: 22px; bottom: 2px; width: 2px;
+  background: repeating-linear-gradient(var(--gold) 0 4px, transparent 4px 9px);
+}
+.route b { display: block; font-weight: 600; color: var(--champagne); }
+.route span { font-size: 15px; color: var(--muted); }
+.decide {
+  margin-top: 24px; display: flex; gap: 12px; align-items: flex-start;
+  font-size: 15px; color: rgba(241,230,205,.85);
+}
+.decide::before { content: "✦"; color: var(--gold); }
+
+/* ---------- Dress code ---------- */
+.dress { background:
+  radial-gradient(ellipse 80% 60% at 50% 100%, rgba(114,47,55,.3), transparent 70%), var(--olive-deep); }
+.dress h2 { font-size: clamp(40px, 9vw, 72px); margin-top: 18px; }
+.dress .lede { margin-top: 14px; color: rgba(241,230,205,.85); max-width: 52ch; font-size: clamp(17px, 2.6vw, 19px); }
+.swatches {
+  margin-top: 44px; padding-top: 0; list-style: none; padding-left: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 3vw, 28px);
+  position: relative;
+}
+.swatches::before { content: ""; position: absolute; left: -4%; right: -4%; top: 0; height: 2px; background: var(--gold); opacity: .55; border-radius: 2px; }
+.swatch { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; }
+.hang { display: flex; flex-direction: column; align-items: center; transform-origin: 50% 0; animation: sway 5s ease-in-out infinite; }
+.swatch:nth-child(2) .hang { animation-delay: -1.7s; }
+.swatch:nth-child(3) .hang { animation-delay: -3.3s; }
+.hang .string { width: 1.5px; height: var(--len, 36px); background: var(--gold); opacity: .7; }
+.bauble {
+  width: clamp(76px, 21vw, 128px); max-width: 100%; aspect-ratio: 1; border-radius: 50%;
+  position: relative; margin-top: 10px;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255,255,255,.5), rgba(255,255,255,0) 30%),
+    radial-gradient(circle at 70% 80%, rgba(0,0,0,.35), rgba(0,0,0,0) 60%),
+    var(--c);
+  box-shadow: 0 20px 34px -16px rgba(0,0,0,.7);
+}
+.bauble::before {
+  content: ""; position: absolute; left: 50%; top: -10px; transform: translateX(-50%);
+  width: 26%; height: 12px; border-radius: 3px 3px 1px 1px;
+  background: linear-gradient(90deg, #8a6f2e, var(--gold), #8a6f2e);
+}
+.swatch .name { margin-top: 18px; font-family: var(--display); font-size: clamp(20px, 4.4vw, 28px); line-height: 1.1; }
+.swatch .hex { margin-top: 4px; font-size: 13px; letter-spacing: .14em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.dress .note { margin-top: 36px; display: flex; gap: 12px; font-size: 15px; color: rgba(241,230,205,.85); }
+.dress .note::before { content: "✦"; color: var(--gold); }
+
+/* ---------- Gift ---------- */
+.gift .amount-row { margin-top: 18px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 20px; }
+.gift .amount { font-family: var(--display); font-size: clamp(72px, 19vw, 150px); line-height: .9; color: var(--gold); }
+.gift .amount-note { font-size: clamp(16px, 2.6vw, 19px); color: var(--muted); }
+.gift h3 { margin-top: 30px; font-size: clamp(30px, 6vw, 44px); }
+.gift h3 .script { font-size: 1.1em; margin-left: 6px; }
+.steps { margin: 22px 0 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 14px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: baseline; }
+.steps li::before {
+  content: counter(s); font-family: var(--display); font-size: 26px; color: var(--burgundy-bright);
+  text-align: center;
+}
+.gift .small { margin-top: 20px; font-size: 15px; color: var(--muted); }
+
+/* ---------- RSVP ---------- */
+.rsvp { text-align: center; background:
+  radial-gradient(ellipse 70% 60% at 50% 0%, rgba(165,47,75,.35), transparent 70%), var(--olive-deep); }
+.rsvp .script { font-size: clamp(44px, 10vw, 72px); }
+.rsvp h2 { font-size: clamp(36px, 8vw, 60px); margin-top: 6px; }
+.rsvp p.lede { margin: 18px auto 0; max-width: 46ch; color: rgba(241,230,205,.85); font-size: clamp(17px, 2.6vw, 19px); }
+.rsvp .ask { margin: 26px auto 0; display: grid; gap: 10px; max-width: 420px; text-align: left; }
+.rsvp .ask div { display: flex; gap: 12px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(47,58,31,.5); }
+.rsvp .ask div::before { content: "✦"; color: var(--gold); }
+.rsvp .hero-actions { margin-top: 30px; }
+.signoff { margin-top: 48px; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Ornament divider ---------- */
+.garland { height: 22px; background:
+  radial-gradient(circle at 11px 11px, var(--burgundy-bright) 0 5px, transparent 6px) 0 0 / 44px 22px repeat-x,
+  radial-gradient(circle at 33px 11px, var(--gold) 0 4px, transparent 5px) 0 0 / 44px 22px repeat-x;
+  opacity: .8; }
+
+/* ---------- Reveal on scroll (content stays faintly visible before it arrives) ---------- */
+.pre { opacity: .2; transform: translateY(34px); }
+.reveal-ready [data-reveal] { transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
+
+#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .pre { opacity: 1; transform: none; }
+}
+</style>
+
+</head>
+<body>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<header class="band hero">
+  <div class="wrap">
+    <button class="parol-btn" id="parol" type="button" aria-label="Pop confetti">
+      <svg class="parol" viewBox="0 0 200 270" aria-hidden="true">
+        <line x1="100" y1="-40" x2="100" y2="12" stroke="#d1b06a" stroke-width="1.5"/>
+        <circle class="glow" cx="100" cy="100" r="92" fill="rgba(209,176,106,.16)"/>
+        <circle cx="100" cy="100" r="88" fill="none" stroke="#d1b06a" stroke-width="3"/>
+        <polygon points="100,20 120,72.5 176.1,75.3 132.3,110.5 147,164.7 100,134 53,164.7 67.7,110.5 23.9,75.3 80,72.5" fill="#a52f4b" stroke="#d1b06a" stroke-width="3" stroke-linejoin="round"/>
+        <g transform="translate(100 100) scale(.42) translate(-100 -100)">
+          <polygon points="100,20 120,72.5 176.1,75.3 132.3,110.5 147,164.7 100,134 53,164.7 67.7,110.5 23.9,75.3 80,72.5" fill="#8f9e60" stroke="#f1e6cd" stroke-width="5" stroke-linejoin="round"/>
+        </g>
+        <circle cx="100" cy="100" r="6" fill="#f1e6cd"/>
+        <g>
+          <path class="tail" d="M70 182 q-8 22 0 44 q8 20 -2 40" fill="none" stroke="#d1b06a" stroke-width="3" stroke-linecap="round"/>
+          <path class="tail" d="M100 188 q8 22 0 44 q-8 20 2 34" fill="none" stroke="#a52f4b" stroke-width="3" stroke-linecap="round"/>
+          <path class="tail" d="M130 182 q8 22 0 44 q-8 20 2 40" fill="none" stroke="#d1b06a" stroke-width="3" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </button>
+
+    <p class="script invited">You're invited to our</p>
+    <h1>Christmas <em>Party</em></h1>
+    <p class="when"><span>Saturday</span><span>12 December 2026</span><span>12 noon</span></p>
+
+    <section class="countdown" aria-labelledby="cd-label">
+      <p class="label" id="cd-label">Counting down to the party</p>
+      <div class="clock" id="clock" role="timer" aria-live="off">
+        <div class="unit"><span class="num" id="cd-d">--</span><small>Days</small></div>
+        <div class="unit"><span class="num" id="cd-h">--</span><small>Hours</small></div>
+        <div class="unit"><span class="num" id="cd-m">--</span><small>Minutes</small></div>
+        <div class="unit"><span class="num" id="cd-s">--</span><small>Seconds</small></div>
+      </div>
+      <p class="party-now" id="party-now" hidden>It's party time! Maligayang Pasko!</p>
+    </section>
+
+    <div class="hero-actions">
+      <button class="btn primary" id="celebrate" type="button">✦ Celebrate</button>
+      <a class="btn ghost" target="_blank" rel="noopener"
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Christmas%20Party&amp;dates=20261212T040000Z%2F20261212T100000Z&amp;location=Kosca%27s&amp;details=Christmas%20Party%20at%2012%20noon.%20White%20elephant%20gift%20exchange%2C%20%E2%82%B11%2C000.">
+        Add to Google Calendar
+      </a>
+    </div>
+    <p class="scroll-hint">Scroll for the details <span>↓</span></p>
+  </div>
+</header>
+
+<div class="garland" aria-hidden="true"></div>
+
+<section class="band olive what">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>What</p>
+    <h2 data-reveal style="--d:.08s">A Christmas lunch, gifts &amp; good company</h2>
+    <p class="lede" data-reveal style="--d:.16s">Good food, games, and the yearly white elephant exchange. Come hungry and bring your best wrapped gift.</p>
+    <dl class="facts" data-reveal style="--d:.24s">
+      <div class="fact"><dt>Occasion</dt><dd>Christmas Party</dd></div>
+      <div class="fact"><dt>Date</dt><dd>Sat, 12 Dec 2026</dd></div>
+      <div class="fact"><dt>Time</dt><dd>12 noon</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="band burgundy where">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>Where</p>
+    <h2 data-reveal style="--d:.08s">Two plans, one party</h2>
+    <p class="lede" data-reveal style="--d:.16s">Either way, we end up together at Kosca's. Here are the two options on the table.</p>
+
+    <div class="options">
+      <article class="option" data-reveal style="--d:.1s">
+        <span class="tag">Option A</span>
+        <h3>Potluck at Kosca's</h3>
+        <p>Everyone brings a dish to share. Lunch, games and gifts all happen at Kosca's.</p>
+        <ol class="route">
+          <li><div><b>Kosca's</b><span>Potluck lunch, then the rest of the party</span></div></li>
+        </ol>
+      </article>
+
+      <article class="option" data-reveal style="--d:.22s">
+        <span class="tag">Option B</span>
+        <h3>Resto first, then Kosca's</h3>
+        <p>Eat out muna sa resto, then gather at Kosca's for the other stuff.</p>
+        <ol class="route">
+          <li><div><b>Restaurant</b><span>Lunch out together</span></div></li>
+          <li><div><b>Kosca's</b><span>Games, gift exchange &amp; more</span></div></li>
+        </ol>
+      </article>
+    </div>
+
+    <p class="decide" data-reveal>Tell the host which option you prefer when you RSVP.</p>
+  </div>
+</section>
+
+<section class="band dress">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>Dress code</p>
+    <h2 data-reveal style="--d:.08s">Dress in the party colors</h2>
+    <p class="lede" data-reveal style="--d:.14s">Wear wine, olive green or gold. Pick one, or mix all three.</p>
+    <ul class="swatches" data-reveal style="--d:.2s">
+      <li class="swatch">
+        <div class="hang" style="--len:28px"><span class="string"></span><span class="bauble" style="--c:var(--wine)"></span></div>
+        <span class="name">Wine</span><span class="hex">#722F37</span>
+      </li>
+      <li class="swatch">
+        <div class="hang" style="--len:52px"><span class="string"></span><span class="bauble" style="--c:var(--olive-dress)"></span></div>
+        <span class="name">Olive Green</span><span class="hex">#636B2F</span>
+      </li>
+      <li class="swatch">
+        <div class="hang" style="--len:36px"><span class="string"></span><span class="bauble" style="--c:var(--gold-dress)"></span></div>
+        <span class="name">Gold</span><span class="hex">#B59410</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="garland" aria-hidden="true"></div>
+
+<section class="band olive gift">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>Exchange gift</p>
+    <div class="amount-row" data-reveal style="--d:.08s">
+      <span class="amount">₱1,000</span>
+      <span class="amount-note">worth of gift, wrapped</span>
+    </div>
+    <h3 data-reveal style="--d:.14s">White Elephant <span class="script">as tradition</span></h3>
+    <ol class="steps" data-reveal style="--d:.2s">
+      <li>Bring one wrapped gift worth about ₱1,000.</li>
+      <li>Everyone draws a number to set the turn order.</li>
+      <li>On your turn, open a new gift or steal one that's already been opened.</li>
+      <li>If your gift gets stolen, you pick again: open a new one or steal another.</li>
+    </ol>
+    <p class="small" data-reveal>Steal limits and other house rules will be announced on the day.</p>
+  </div>
+</section>
+
+<section class="band rsvp" id="rsvp">
+  <div class="wrap">
+    <p class="script" data-reveal>Kindly</p>
+    <h2 data-reveal style="--d:.08s">RSVP to the host</h2>
+    <p class="lede" data-reveal style="--d:.14s">Send the host a message to let them know:</p>
+    <div class="ask" data-reveal style="--d:.2s">
+      <div>Whether you can make it</div>
+      <div>Which plan you prefer: Option A or Option B</div>
+    </div>
+    <div class="hero-actions" data-reveal style="--d:.26s">
+      <button class="btn primary" id="celebrate2" type="button">✦ See you there</button>
+    </div>
+    <p class="signoff">Maligayang Pasko · 12.12.2026</p>
+  </div>
+</section>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Countdown (12 noon Philippine time) ---------- */
+  var target = new Date("2026-12-12T12:00:00+08:00").getTime();
+  var els = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"),
+              m: document.getElementById("cd-m"), s: document.getElementById("cd-s") };
+  var timer;
+  function set(el, v) {
+    if (el.textContent === v) return;
+    el.textContent = v;
+    if (!reduce) { el.classList.remove("flip"); void el.offsetWidth; el.classList.add("flip"); }
+  }
+  function pad(n) { return n < 10 ? "0" + n : String(n); }
+  function tick() {
+    var diff = target - Date.now();
+    if (diff <= 0) {
+      document.getElementById("clock").hidden = true;
+      document.getElementById("cd-label").hidden = true;
+      document.getElementById("party-now").hidden = false;
+      clearInterval(timer);
+      return;
+    }
+    var s = Math.floor(diff / 1000);
+    set(els.d, String(Math.floor(s / 86400)));
+    set(els.h, pad(Math.floor(s % 86400 / 3600)));
+    set(els.m, pad(Math.floor(s % 3600 / 60)));
+    set(els.s, pad(s % 60));
+  }
+  tick();
+  timer = setInterval(tick, 1000);
+
+  /* ---------- Confetti ---------- */
+  var canvas = document.getElementById("confetti");
+  var ctx = canvas.getContext("2d");
+  var colors = ["#a52f4b", "#5e1526", "#d1b06a", "#f1e6cd", "#8f9e60", "#2f3a1f"];
+  var parts = [], running = false, W = 0, H = 0, dpr = 1;
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  size();
+  window.addEventListener("resize", size);
+
+  function burst(x, y, count, spread) {
+    if (reduce) return;
+    for (var i = 0; i < count; i++) {
+      var a = (-Math.PI / 2) + (Math.random() - .5) * (spread || Math.PI * 1.2);
+      var v = 6 + Math.random() * 9;
+      parts.push({
+        x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+        w: 6 + Math.random() * 7, h: 8 + Math.random() * 10,
+        r: Math.random() * Math.PI, vr: (Math.random() - .5) * .3,
+        t: Math.random() * 10, c: colors[i % colors.length],
+        star: Math.random() < .18
+      });
+    }
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  }
+  function drawStar(r) {
+    ctx.beginPath();
+    for (var i = 0; i < 10; i++) {
+      var ang = -Math.PI / 2 + i * Math.PI / 5, rad = i % 2 ? r * .45 : r;
+      ctx.lineTo(Math.cos(ang) * rad, Math.sin(ang) * rad);
+    }
+    ctx.closePath(); ctx.fill();
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = parts.length - 1; i >= 0; i--) {
+      var p = parts[i];
+      p.vy += .22; p.vx *= .985; p.vy *= .985; p.t += .12;
+      p.x += p.vx + Math.sin(p.t) * .8; p.y += p.vy; p.r += p.vr;
+      if (p.y > H + 30) { parts.splice(i, 1); continue; }
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c;
+      if (p.star) drawStar(p.w * .8);
+      else { ctx.scale(1, Math.cos(p.t)); ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+      ctx.restore();
+    }
+    if (parts.length) requestAnimationFrame(loop);
+    else { running = false; ctx.clearRect(0, 0, W, H); }
+  }
+  function burstFrom(el, n) {
+    var r = el.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, n || 120, Math.PI * 1.4);
+  }
+  if (reduce) {
+    ["celebrate", "celebrate2"].forEach(function (id) { document.getElementById(id).hidden = true; });
+  }
+  document.getElementById("celebrate").addEventListener("click", function () { burstFrom(this, 160); });
+  document.getElementById("celebrate2").addEventListener("click", function () { burstFrom(this, 160); });
+  document.getElementById("parol").addEventListener("click", function () { burstFrom(this, 120); });
+
+  setTimeout(function () {
+    burst(W * .15, H * .9, 90, Math.PI * .7);
+    burst(W * .85, H * .9, 90, Math.PI * .7);
+  }, 450);
+
+  /* ---------- Reveal details on scroll ---------- */
+  if (!reduce && "IntersectionObserver" in window) {
+    var items = [].slice.call(document.querySelectorAll("[data-reveal]"));
+    items.forEach(function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight * .92) el.classList.add("pre");
+    });
+    requestAnimationFrame(function () { document.body.classList.add("reveal-ready"); });
+    var rsvp = document.getElementById("rsvp"), rsvpPopped = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        if (e.target === rsvp) {
+          if (!rsvpPopped) { rsvpPopped = true; burst(W / 2, H, 110, Math.PI * .9); }
+          io.unobserve(rsvp);
+          return;
+        }
+        e.target.classList.remove("pre");
+        io.unobserve(e.target);
+      });
+    }, { threshold: .18, rootMargin: "0px 0px -6% 0px" });
+    items.forEach(function (el) { if (el.classList.contains("pre")) io.observe(el); });
+    io.observe(rsvp);
+  }
+})();
+</script>
+</body>
+</html>
