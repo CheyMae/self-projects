@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B1G Christmas Party 2026</title>
+<meta name="description" content="CCF Santa Rosa B1G Christmas Party · Friday, 27 November 2026 · 7:00 PM · CCFSR Worship Hall">
+<meta property="og:title" content="B1G Christmas Party · Nov 27, 7:00 PM">
+<meta property="og:description" content="Fun, games (with prizes!) and fellowship at the CCFSR Worship Hall. Bring your friends and some food to share.">
+<meta name="theme-color" content="#C8102E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caveat+Brush&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a red hero with falling snow, then white information bands split by candy-cane stripes.
+   Single deliberate red-and-white look, so no light/dark switch. */
+:root {
+  --red: #C8102E;
+  --red-deep: #8E0A1F;
+  --red-soft: #F7A1B0;
+  --white: #FFFFFF;
+  --snow: #FFF4F5;
+  --ink: #2B0A11;
+  --muted: #7A4A53;
+  --line: rgba(200, 16, 46, .16);
+
+  --display: "Bricolage Grotesque", "Arial Rounded MT Bold", "Segoe UI", system-ui, sans-serif;
+  --hand: "Caveat Brush", "Bricolage Grotesque", "Segoe UI", sans-serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+
+  --col: 760px;
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--red);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--snow);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.02; text-wrap: balance; }
+p { margin: 0; }
+
+.band {
+  position: relative;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: clamp(52px, 9vw, 96px);
+}
+.wrap { max-width: var(--col); margin-inline: auto; position: relative; }
+.eyebrow {
+  font: 700 13px/1 var(--body); letter-spacing: .2em; text-transform: uppercase; color: var(--red);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,.16), transparent 70%),
+    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(0,0,0,.25), transparent 70%),
+    var(--red);
+  color: var(--white);
+  text-align: center;
+  overflow: hidden;
+  padding-block: clamp(36px, 7vw, 64px) clamp(56px, 9vw, 88px);
+}
+#snow { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.logo { display: block; width: min(420px, 78%); height: auto; margin: 0 auto; filter: drop-shadow(0 6px 18px rgba(0,0,0,.25)); }
+.lyric {
+  margin-top: clamp(22px, 4vw, 32px);
+  font-family: var(--hand); font-size: clamp(24px, 5.4vw, 36px); line-height: 1.15;
+}
+.lyric .note { display: inline-block; animation: bop 1.4s ease-in-out infinite; }
+@keyframes bop { 0%,100% { transform: translateY(0) rotate(-8deg); } 50% { transform: translateY(-6px) rotate(8deg); } }
+.hero h1 {
+  margin-top: 10px;
+  font-size: clamp(52px, 13vw, 112px);
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+.hero h1 span { display: block; }
+.hero h1 .big { color: var(--white); text-shadow: 0 6px 0 var(--red-deep); }
+.when-strip {
+  margin: 22px auto 0;
+  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+}
+.when-strip span {
+  background: var(--white); color: var(--red);
+  font: 700 clamp(14px, 3.4vw, 17px)/1 var(--body);
+  padding: 10px 16px; border-radius: 999px;
+  box-shadow: 0 4px 0 var(--red-deep);
+}
+
+/* Countdown */
+.countdown { margin-top: clamp(30px, 6vw, 44px); }
+.countdown .label { font: 600 13px/1 var(--body); letter-spacing: .2em; text-transform: uppercase; opacity: .9; }
+.clock {
+  margin: 14px auto 0; max-width: 560px;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(8px, 2vw, 14px);
+}
+.unit {
+  background: var(--white); color: var(--red);
+  border-radius: 18px;
+  padding: clamp(12px, 3vw, 20px) 4px clamp(10px, 2.4vw, 14px);
+  box-shadow: 0 6px 0 var(--red-deep), 0 18px 30px -16px rgba(0,0,0,.45);
+  overflow: hidden;
+}
+.num {
+  display: block;
+  font: 800 clamp(34px, 9.5vw, 66px)/1 var(--display);
+  font-variant-numeric: tabular-nums;
+}
+.num.pop { animation: pop .45s cubic-bezier(.3,1.6,.5,1); }
+@keyframes pop { from { transform: scale(.6) translateY(20%); opacity: .2; } to { transform: none; opacity: 1; } }
+.unit small { display: block; margin-top: 6px; font: 700 11px/1 var(--body); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.party-now { margin-top: 16px; font: 800 clamp(30px, 7vw, 48px)/1.1 var(--display); }
+
+.actions { margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.btn {
+  font: 700 15px/1 var(--body); letter-spacing: .02em;
+  padding: 15px 22px; border-radius: 999px; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: transform .15s;
+  border: 2px solid transparent;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.hero .btn:focus-visible, .finale .btn:focus-visible { outline-color: var(--white); }
+.btn.solid { background: var(--white); color: var(--red); box-shadow: 0 4px 0 var(--red-deep); }
+.btn.line { background: transparent; color: var(--white); border-color: rgba(255,255,255,.7); }
+.btn.red { background: var(--red); color: var(--white); box-shadow: 0 4px 0 var(--red-deep); }
+
+/* Candy-cane divider */
+.cane {
+  height: 18px;
+  background: repeating-linear-gradient(-45deg, var(--red) 0 14px, var(--white) 14px 28px);
+  background-size: 200% 100%;
+  animation: cane 14s linear infinite;
+  border-block: 2px solid var(--red-deep);
+}
+@keyframes cane { to { background-position: -200% 0; } }
+
+/* ---------- Ready? ---------- */
+.ready { background: var(--white); }
+.ready h2 { margin-top: 14px; font-size: clamp(40px, 9vw, 72px); font-weight: 800; color: var(--red); }
+.ready .lede { margin-top: 16px; font-size: clamp(18px, 2.8vw, 21px); max-width: 52ch; }
+.trio { margin-top: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 2.4vw, 18px); }
+.chip {
+  background: var(--snow); border: 2px solid var(--line); border-radius: 20px;
+  padding: clamp(16px, 3vw, 22px) 12px; text-align: center; min-width: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.chip .ico { font-size: clamp(32px, 7vw, 44px); line-height: 1; display: inline-block; }
+.chip:hover .ico { animation: wiggle .6s ease-in-out; }
+@keyframes wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-14deg); } 75% { transform: rotate(14deg); } }
+.chip b { font: 800 clamp(18px, 3.6vw, 24px)/1.1 var(--display); color: var(--red); }
+.chip span { font-size: clamp(13px, 2.4vw, 15px); color: var(--muted); }
+
+/* ---------- Details ---------- */
+.details { background: var(--snow); }
+.details h2 { margin-top: 14px; font-size: clamp(36px, 8vw, 60px); font-weight: 800; }
+.cards { margin-top: 30px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.card {
+  background: var(--red); color: var(--white);
+  border-radius: 24px; padding: 24px 22px 26px;
+  box-shadow: 0 8px 0 var(--red-deep), 0 24px 40px -24px rgba(142,10,31,.7);
+  display: flex; flex-direction: column; gap: 8px; min-width: 0;
+  position: relative; overflow: hidden;
+}
+.card::after {
+  content: ""; position: absolute; right: -30px; top: -30px; width: 110px; height: 110px; border-radius: 50%;
+  background: rgba(255,255,255,.1);
+}
+.card .k { font: 700 12px/1 var(--body); letter-spacing: .2em; text-transform: uppercase; opacity: .85; }
+.card .v { font: 800 clamp(34px, 6vw, 48px)/1 var(--display); letter-spacing: -.01em; }
+.card .v.venue { font-size: clamp(26px, 4.4vw, 34px); line-height: 1.08; }
+.card .s { font-size: 15px; opacity: .9; }
+
+/* ---------- Bring ---------- */
+.bring { background: var(--white); }
+.bring h2 { margin-top: 14px; font-size: clamp(36px, 8vw, 60px); font-weight: 800; }
+.pair { margin-top: 30px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.note-card {
+  border: 2px dashed var(--red); border-radius: 24px; padding: 24px 22px;
+  background: var(--snow); min-width: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.note-card h3 { font-size: clamp(24px, 4.6vw, 32px); font-weight: 800; color: var(--red); }
+.note-card .tagline { font-family: var(--hand); font-size: clamp(22px, 4vw, 26px); line-height: 1.1; color: var(--red-deep); }
+.note-card p { color: var(--ink); }
+
+/* ---------- Finale ---------- */
+.finale { background: var(--red); color: var(--white); text-align: center; overflow: hidden; }
+.finale h2 { font-size: clamp(34px, 7.4vw, 58px); font-weight: 800; }
+.finale p { margin: 14px auto 0; max-width: 44ch; font-size: clamp(17px, 2.6vw, 19px); opacity: .95; }
+.finale .logo { width: min(240px, 60%); margin-top: 36px; opacity: .95; }
+.finale .fine { margin-top: 14px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; opacity: .8; }
+
+/* Stack to one column on phones */
+@media (max-width: 640px) {
+  .cards, .pair { grid-template-columns: 1fr; }
+}
+@media (max-width: 380px) {
+  .trio { grid-template-columns: 1fr; }
+  .chip { flex-direction: row; text-align: left; justify-content: flex-start; padding-inline: 16px; }
+}
+
+/* Reveal on scroll: content stays faintly visible until it arrives */
+.pre { opacity: .2; transform: translateY(30px) scale(.98); }
+.reveal-ready [data-reveal] { transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.3,1.4,.5,1); transition-delay: var(--d, 0s); }
+
+#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .pre { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<header class="band hero">
+  <canvas id="snow" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <img class="logo" src="logo.webp" width="2000" height="400" alt="B1G CCF Santa Rosa">
+    <p class="lyric">It's beginning to look a lot like Christmas <span class="note">🎶</span></p>
+    <h1><span class="big">B1G Christmas Party</span></h1>
+    <p class="when-strip"><span>Fri, Nov 27</span><span>7:00 PM</span><span>CCFSR Worship Hall</span></p>
+
+    <section class="countdown" aria-labelledby="cd-label">
+      <p class="label" id="cd-label">Party starts in</p>
+      <div class="clock" id="clock" role="timer" aria-live="off">
+        <div class="unit"><span class="num" id="cd-d">--</span><small>Days</small></div>
+        <div class="unit"><span class="num" id="cd-h">--</span><small>Hours</small></div>
+        <div class="unit"><span class="num" id="cd-m">--</span><small>Mins</small></div>
+        <div class="unit"><span class="num" id="cd-s">--</span><small>Secs</small></div>
+      </div>
+      <p class="party-now" id="party-now" hidden>It's party time, B1G! 🎉</p>
+    </section>
+
+    <div class="actions">
+      <a class="btn solid" target="_blank" rel="noopener"
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=B1G%20Christmas%20Party&amp;dates=20261127T110000Z%2F20261127T140000Z&amp;location=CCF%20Santa%20Rosa%20Worship%20Hall&amp;details=Fun%2C%20games%20(with%20prizes)%20and%20fellowship.%20Bring%20your%20friends%20and%20food%20to%20share%20(Potbless).">
+        Add to calendar
+      </a>
+      <a class="btn line" href="#details">See the details ↓</a>
+    </div>
+  </div>
+</header>
+
+<div class="cane" aria-hidden="true"></div>
+
+<section class="band ready">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>You're invited</p>
+    <h2 data-reveal style="--d:.06s">Are we ready, B1G?</h2>
+    <p class="lede" data-reveal style="--d:.12s">Join us as we celebrate God's amazing faithfulness all year! Let's have an exciting night together.</p>
+    <div class="trio">
+      <div class="chip" data-reveal style="--d:.1s"><span class="ico" aria-hidden="true">🎉</span><div><b>Fun</b></div></div>
+      <div class="chip" data-reveal style="--d:.18s"><span class="ico" aria-hidden="true">🎁</span><div><b>Games</b><br><span>with prizes 👀</span></div></div>
+      <div class="chip" data-reveal style="--d:.26s"><span class="ico" aria-hidden="true">🥳</span><div><b>Fellowship</b></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band details" id="details">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>Event details</p>
+    <h2 data-reveal style="--d:.06s">Save the date</h2>
+    <div class="cards">
+      <div class="card" data-reveal style="--d:.08s"><span class="k">Date</span><span class="v">Nov 27</span><span class="s">Friday, 2026</span></div>
+      <div class="card" data-reveal style="--d:.16s"><span class="k">Event starts</span><span class="v">7:00 PM</span><span class="s">Come a little early!</span></div>
+      <div class="card" data-reveal style="--d:.24s"><span class="k">Venue</span><span class="v venue">CCFSR Worship Hall</span><span class="s">CCF Santa Rosa</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="cane" aria-hidden="true"></div>
+
+<section class="band bring">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>What to bring</p>
+    <h2 data-reveal style="--d:.06s">Bring your friends &amp; a dish</h2>
+    <div class="pair">
+      <article class="note-card" data-reveal style="--d:.08s">
+        <h3>Your friends ✨</h3>
+        <p class="tagline">The more the merrier!</p>
+        <p>Invite your barkada, classmates or officemates. Everyone is welcome.</p>
+      </article>
+      <article class="note-card" data-reveal style="--d:.16s">
+        <h3>Food to share</h3>
+        <p class="tagline">It's a Potbless!</p>
+        <p>We encourage everyone to bring a dish to share with the group.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer class="band finale" id="finale">
+  <div class="wrap">
+    <h2 data-reveal>We're so excited to see you soon!</h2>
+    <p data-reveal style="--d:.08s">Friday, November 27 · 7:00 PM · CCFSR Worship Hall</p>
+    <div class="actions" data-reveal style="--d:.14s">
+      <button class="btn solid" id="celebrate" type="button">🎉 Count me in!</button>
+    </div>
+    <img class="logo" src="logo.webp" width="2000" height="400" alt="B1G CCF Santa Rosa">
+    <p class="fine">CCF Santa Rosa</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Countdown (7:00 PM Philippine time) ---------- */
+  var target = new Date("2026-11-27T19:00:00+08:00").getTime();
+  var els = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"),
+              m: document.getElementById("cd-m"), s: document.getElementById("cd-s") };
+  var timer;
+  function set(el, v) {
+    if (el.textContent === v) return;
+    el.textContent = v;
+    if (!reduce) { el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop"); }
+  }
+  function pad(n) { return n < 10 ? "0" + n : String(n); }
+  function tick() {
+    var diff = target - Date.now();
+    if (diff <= 0) {
+      document.getElementById("clock").hidden = true;
+      document.getElementById("cd-label").hidden = true;
+      document.getElementById("party-now").hidden = false;
+      clearInterval(timer);
+      return;
+    }
+    var s = Math.floor(diff / 1000);
+    set(els.d, String(Math.floor(s / 86400)));
+    set(els.h, pad(Math.floor(s % 86400 / 3600)));
+    set(els.m, pad(Math.floor(s % 3600 / 60)));
+    set(els.s, pad(s % 60));
+  }
+  tick();
+  timer = setInterval(tick, 1000);
+
+  /* ---------- Snow in the hero ---------- */
+  var hero = document.querySelector(".hero");
+  var sc = document.getElementById("snow"), sx = sc.getContext("2d");
+  var flakes = [], SW = 0, SH = 0, dpr = 1;
+  function sizeSnow() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    SW = hero.offsetWidth; SH = hero.offsetHeight;
+    sc.width = SW * dpr; sc.height = SH * dpr;
+    sx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var want = Math.round(Math.min(90, SW / 9));
+    while (flakes.length < want) flakes.push(newFlake(true));
+    flakes.length = want;
+  }
+  function newFlake(anywhere) {
+    return { x: Math.random() * SW, y: anywhere ? Math.random() * SH : -10,
+             r: 1 + Math.random() * 3, v: .4 + Math.random() * 1.1, t: Math.random() * 6, a: .35 + Math.random() * .5 };
+  }
+  function snow() {
+    sx.clearRect(0, 0, SW, SH);
+    for (var i = 0; i < flakes.length; i++) {
+      var f = flakes[i];
+      f.y += f.v; f.t += .02; f.x += Math.sin(f.t) * .4;
+      if (f.y > SH + 10) flakes[i] = f = newFlake(false);
+      sx.globalAlpha = f.a; sx.fillStyle = "#fff";
+      sx.beginPath(); sx.arc(f.x, f.y, f.r, 0, Math.PI * 2); sx.fill();
+    }
+    sx.globalAlpha = 1;
+    requestAnimationFrame(snow);
+  }
+  sizeSnow();
+  window.addEventListener("resize", sizeSnow);
+  if (!reduce) requestAnimationFrame(snow);
+
+  /* ---------- Confetti ---------- */
+  var canvas = document.getElementById("confetti"), ctx = canvas.getContext("2d");
+  var colors = ["#C8102E", "#8E0A1F", "#F7A1B0", "#FFFFFF", "#E8475F"];
+  var parts = [], running = false, W = 0, H = 0;
+  function size() {
+    var r = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * r; canvas.height = H * r;
+    ctx.setTransform(r, 0, 0, r, 0, 0);
+  }
+  size();
+  window.addEventListener("resize", size);
+  function burst(x, y, count, spread) {
+    if (reduce) return;
+    for (var i = 0; i < count; i++) {
+      var a = -Math.PI / 2 + (Math.random() - .5) * spread, v = 6 + Math.random() * 9;
+      parts.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+        w: 6 + Math.random() * 7, h: 8 + Math.random() * 10, r: Math.random() * 3, vr: (Math.random() - .5) * .3,
+        t: Math.random() * 10, c: colors[i % colors.length] });
+    }
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  }
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = parts.length - 1; i >= 0; i--) {
+      var p = parts[i];
+      p.vy += .22; p.vx *= .985; p.vy *= .985; p.t += .12;
+      p.x += p.vx + Math.sin(p.t) * .8; p.y += p.vy; p.r += p.vr;
+      if (p.y > H + 30) { parts.splice(i, 1); continue; }
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.scale(1, Math.cos(p.t));
+      ctx.fillStyle = p.c; ctx.strokeStyle = "rgba(142,10,31,.35)"; ctx.lineWidth = 1;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      if (p.c === "#FFFFFF") ctx.strokeRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    }
+    if (parts.length) requestAnimationFrame(loop);
+    else { running = false; ctx.clearRect(0, 0, W, H); }
+  }
+  var btn = document.getElementById("celebrate");
+  if (reduce) btn.hidden = true;
+  btn.addEventListener("click", function () {
+    var r = btn.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, 170, Math.PI * 1.4);
+  });
+  setTimeout(function () { burst(W * .15, H * .95, 80, Math.PI * .7); burst(W * .85, H * .95, 80, Math.PI * .7); }, 400);
+
+  /* ---------- Reveal on scroll ---------- */
+  if (!reduce && "IntersectionObserver" in window) {
+    var items = [].slice.call(document.querySelectorAll("[data-reveal]"));
+    items.forEach(function (el) { if (el.getBoundingClientRect().top > window.innerHeight * .92) el.classList.add("pre"); });
+    requestAnimationFrame(function () { document.body.classList.add("reveal-ready"); });
+    var finale = document.getElementById("finale"), popped = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        if (e.target === finale) { if (!popped) { popped = true; burst(W / 2, H, 110, Math.PI * .9); } io.unobserve(finale); return; }
+        e.target.classList.remove("pre"); io.unobserve(e.target);
+      });
+    }, { threshold: .18, rootMargin: "0px 0px -6% 0px" });
+    items.forEach(function (el) { if (el.classList.contains("pre")) io.observe(el); });
+    io.observe(finale);
+  }
+})();
+</script>
+</body>
+</html>
