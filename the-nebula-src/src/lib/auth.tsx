@@ -8,7 +8,11 @@ interface AuthState {
   session: Session | null
   /** The signed-in reader's Library name. */
   me: LibraryName | null
+  /** True right after a reader's first sign-in, until they set or skip a new password. */
+  needsPassword: boolean
   signIn: (name: LibraryName, password: string) => Promise<string | null>
+  setPassword: (password: string) => Promise<string | null>
+  skipPassword: () => Promise<void>
   signOut: () => Promise<void>
 }
 
@@ -17,6 +21,11 @@ const AuthContext = createContext<AuthState | null>(null)
 async function loadName(userId: string): Promise<LibraryName | null> {
   const { data } = await supabase.from('profiles').select('name').eq('id', userId).maybeSingle()
   return findLibrary(data?.name) ?? null
+}
+
+function promptedFor(session: Session | null) {
+  const meta = session?.user.user_metadata ?? {}
+  return !!session && !meta.password_set && !meta.password_prompted
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -52,9 +61,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       password,
     })
     if (error) {
-      return error.message === 'Invalid login credentials'
-        ? `That password doesn't open ${name}'s Library.`
-        : error.message
+      if (error.message === 'Invalid login credentials') return `That password doesn't open ${name}'s Library.`
+      if (/not confirmed/i.test(error.message))
+        return `${name}'s account isn't confirmed yet. Confirm the user in Supabase, then try again.`
+      return error.message
     }
     const lib = await loadName(data.user.id)
     if (!lib) {
@@ -66,6 +76,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return null
   }
 
+  const setPassword = async (password: string) => {
+    const { data, error } = await supabase.auth.updateUser({
+      password,
+      data: { password_set: true, password_prompted: true },
+    })
+    if (error) {
+      if (/different from the old/i.test(error.message)) return 'Choose a password different from the one you were given.'
+      return error.message
+    }
+    const { data: s } = await supabase.auth.getSession()
+    setSession(s.session ?? (session && data.user ? { ...session, user: data.user } : session))
+    return null
+  }
+
+  const skipPassword = async () => {
+    const { data } = await supabase.auth.updateUser({ data: { password_prompted: true } })
+    if (data.user && session) setSession({ ...session, user: data.user })
+  }
+
   const signOut = async () => {
     await supabase.auth.signOut()
     setSession(null)
@@ -73,7 +102,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ loading, session, me, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{
+        loading,
+        session,
+        me,
+        needsPassword: !!me && promptedFor(session),
+        signIn,
+        setPassword,
+        skipPassword,
+        signOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )

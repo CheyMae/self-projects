@@ -1,13 +1,13 @@
-import { ArrowRight, Bookmark, LogOut, Plus } from 'lucide-react'
+import { ArrowRight, Bookmark, KeyRound, LogOut, Plus } from 'lucide-react'
 import { useEffect, type CSSProperties, type ReactNode } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { Atmosphere } from '../components/Atmosphere'
 import { TabBar } from '../components/TabBar'
 import { WorldIcon } from '../components/WorldIcon'
 import { useAuth } from '../lib/auth'
+import { onOrbit } from '../lib/geometry'
 import { findLibrary } from '../lib/libraries'
+import { useGeometry } from '../lib/useGeometry'
 import { useLibrary } from '../lib/useLibrary'
-import { useViewport } from '../lib/useViewport'
 import { ORBIT_WORLD_SLOTS, recordVisit } from '../lib/worlds'
 
 interface OrbitItem {
@@ -17,10 +17,7 @@ interface OrbitItem {
   icon: ReactNode
 }
 
-// Design canvas is 1440×900; the orbit is centred at (140, 450) with r = 420.
-const CENTER_X = 140
-const CENTER_Y = 450
-const RADIUS = 420
+// Nodes sit 20° apart on the orbit, centred on the planet's horizon.
 const STEP_DEG = 20
 
 export function Home() {
@@ -28,7 +25,7 @@ export function Home() {
   const library = findLibrary(param)
   const { me, session, signOut } = useAuth()
   const { data, error } = useLibrary(library)
-  const { w, h } = useViewport()
+  const g = useGeometry('home')
 
   const isMine = library === me
 
@@ -43,21 +40,21 @@ export function Home() {
     key: wld.id,
     label: wld.title.trim() || 'Untitled world',
     to: `/world/${wld.id}`,
-    icon: <WorldIcon name={wld.icon} />,
+    icon: <WorldIcon name={wld.icon} size={g.compact ? 20 : 24} />,
   }))
   if (isMine) {
     items.push({
       key: 'new',
       label: 'Start writing',
       to: `/library/${library}/new`,
-      icon: <Plus size={26} strokeWidth={1.3} />,
+      icon: <Plus size={g.compact ? 22 : 26} strokeWidth={1.3} />,
     })
   }
   items.push({
     key: 'archive',
     label: 'Archive',
     to: `/library/${library}/archive`,
-    icon: <Bookmark size={24} strokeWidth={1.4} />,
+    icon: <Bookmark size={g.compact ? 20 : 24} strokeWidth={1.4} />,
   })
 
   const chapters = worlds.reduce((sum, wld) => sum + wld.chapters, 0)
@@ -67,56 +64,61 @@ export function Home() {
     { value: data?.wanderers ?? 0, label: 'Wanderers' },
   ]
 
-  const compact = w < 1000
-  const scale = Math.min(1, h / 900)
+  const style = {
+    '--cx': `${g.cx}px`,
+    '--cy': `${g.cy}px`,
+    '--k': g.scale,
+    '--node': `${g.node}px`,
+  } as CSSProperties
 
-  return (
-    <main className={`home${compact ? ' home--compact' : ''}`}>
-      <Atmosphere variant="home" />
-      <TabBar />
-      <button className="sign-out" onClick={signOut} title={`Signed in as ${me ?? ''}`}>
+  const account = (
+    <div className="account-links">
+      <Link to="/password" className="account-link">
+        <KeyRound size={14} strokeWidth={1.5} /> <span>Password</span>
+      </Link>
+      <button className="account-link" onClick={signOut} title={`Signed in as ${me ?? ''}`}>
         <LogOut size={14} strokeWidth={1.5} /> <span>Sign out</span>
       </button>
+    </div>
+  )
 
-      {!compact ? (
-        <div
-          className="orbit-stage"
-          style={{ transform: `scale(${scale})`, '--cy': `${CENTER_Y}px` } as CSSProperties}
-        >
-          <div className="orbit-circle orbit-circle--dashed" style={circle(575)} />
-          <div className="orbit-circle orbit-circle--faint" style={circle(660)} />
-          <div className="orbit-circle orbit-circle--ring" style={circle(RADIUS)} />
-          <div className="orbit-circle orbit-circle--halo" style={circle(374)} />
-          <div className="orbit-circle orbit-circle--disc" style={circle(360)} />
+  return (
+    <main className={`home${g.compact ? ' home--compact' : ''}`} style={style}>
+      <div className="home__tabs">
+        <TabBar />
+      </div>
+      {!g.compact && account}
 
-          <HeroContent library={library} stats={stats} />
+      <div className="hero-content" key={library}>
+        <p className="eyebrow">Welcome to</p>
+        <h1 className="display display--left">The Library</h1>
+        <div className="divider divider--left" />
+        <p className="hero-content__sub">This is {library}’s collection of worlds</p>
+        <dl className="stats">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <dt>{s.label}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
 
-          {items.map((item, i) => {
-            const deg = (i - (items.length - 1) / 2) * STEP_DEG
-            const rad = (deg * Math.PI) / 180
-            const x = CENTER_X + RADIUS * Math.cos(rad)
-            const y = CENTER_Y + RADIUS * Math.sin(rad)
-            return (
-              <Link key={item.key} to={item.to} className="orbit-node" style={{ left: x, top: y }}>
-                <span className="orbit-node__circle">{item.icon}</span>
-                <span className="orbit-node__label">{item.label}</span>
-              </Link>
-            )
-          })}
-        </div>
-      ) : (
-        <div className="home-compact">
-          <HeroContent library={library} stats={stats} />
-          <div className="home-compact__list">
-            {items.map((item) => (
-              <Link key={item.key} to={item.to} className="orbit-node orbit-node--row">
-                <span className="orbit-node__circle">{item.icon}</span>
-                <span className="orbit-node__label">{item.label}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      {items.map((item, i) => {
+        const deg = (i - (items.length - 1) / 2) * STEP_DEG
+        const p = onOrbit(g, deg)
+        return (
+          <Link
+            key={`${library}-${item.key}`}
+            to={item.to}
+            className="orbit-node"
+            style={{ left: p.x, top: p.y, animationDelay: `${0.55 + i * 0.08}s` } as CSSProperties}
+          >
+            <span className="orbit-node__circle">{item.icon}</span>
+            <span className="orbit-node__label">{item.label}</span>
+          </Link>
+        )
+      })}
 
       <aside className="highlights">
         <p className="micro">Quick links to get you started</p>
@@ -132,39 +134,9 @@ export function Home() {
           <p>More soon!</p>
         </div>
         {error && <p className="error-text">{error}</p>}
-        {data && !data.ownerId && (
-          <p className="muted-text">{library} hasn’t opened their Library yet.</p>
-        )}
+        {data && !data.ownerId && <p className="muted-text">{library} hasn’t opened their Library yet.</p>}
+        {g.compact && account}
       </aside>
     </main>
-  )
-}
-
-function circle(r: number): CSSProperties {
-  return { left: CENTER_X - r, top: CENTER_Y - r, width: r * 2, height: r * 2 }
-}
-
-function HeroContent({
-  library,
-  stats,
-}: {
-  library: string
-  stats: { value: number; label: string }[]
-}) {
-  return (
-    <div className="hero-content">
-      <p className="eyebrow">Welcome to</p>
-      <h1 className="display display--left">The Library</h1>
-      <div className="divider divider--left" />
-      <p className="hero-content__sub">This is {library}’s collection of worlds</p>
-      <dl className="stats">
-        {stats.map((s) => (
-          <div key={s.label}>
-            <dt>{s.label}</dt>
-            <dd>{s.value}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
   )
 }
