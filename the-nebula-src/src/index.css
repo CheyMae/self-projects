@@ -1115,9 +1115,10 @@ button:disabled {
 .highlights {
   position: absolute;
   right: 48px;
-  top: 50%;
-  transform: translateY(-50%);
-  translate: 0 -8px;
+  /* Centred in the space below the Library tabs. */
+  top: calc(50% + 34px);
+  transform: translateY(-50%) scale(var(--hs, 1));
+  transform-origin: right center;
   width: 420px;
   display: flex;
   flex-direction: column;
@@ -2166,4 +2167,117 @@ button.page-icon:not(:disabled):hover {
   .doc {
     font-size: 15px;
   }
+}
+
+/* ── Welcome on short, wide screens (landscape tablet, small laptop) ── */
+.welcome--split .welcome__core {
+  width: calc(var(--disc) * 1.8);
+}
+
+.welcome--split .eyebrow {
+  font-size: 12px;
+}
+
+.welcome--split .welcome__core .display {
+  font-size: clamp(30px, calc(64px * var(--k)), 52px);
+  margin-top: 6px;
+}
+
+.welcome--split .welcome__core .display--create {
+  font-size: clamp(28px, calc(52px * var(--k)), 44px);
+}
+
+.welcome--split .divider {
+  width: 60%;
+  margin: 10px auto;
+}
+
+.welcome--split .welcome__select {
+  font-size: 13px;
+}
+
+.welcome--split .welcome__name {
+  margin: 0;
+  font-size: 22px;
+}
+
+.welcome--split .welcome__below {
+  left: var(--panel-left);
+  right: auto;
+  width: var(--panel-w);
+  top: 50%;
+  transform: translateY(-50%);
+  max-height: calc(100% - 48px);
+  padding: 0;
+}
+
+.welcome--split .welcome__panel {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.welcome--split .welcome__intro {
+  max-width: none;
+}
+
+.welcome--split .field {
+  width: 100%;
+}
+
+.welcome--split .welcome__tagline {
+  margin-bottom: 16px;
+}
+
+.welcome--split .lib-node {
+  width: 72px;
+  margin-left: -36px;
+}
+
+.welcome--split .lib-node__label {
+  font-size: 11px;
+}
+
+.welcome--split .welcome__footer {
+  display: none;
+}
+
+.welcome--split .welcome__brand {
+  top: 24px;
+  left: 32px;
+}
+
+/* Tablets / small laptops: icon-only account links so they clear the Library tabs. */
+@media (max-width: 1199px) {
+  .home > .account-links {
+    right: 24px;
+    gap: 18px;
+  }
+  .home > .account-links span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}
+
+/* Compact Home grows with the screen (phone → portrait tablet). */
+.home--compact .hero-content .eyebrow {
+  font-size: calc(12px * var(--k));
+}
+.home--compact .hero-content__sub {
+  font-size: calc(14px * var(--k));
+  line-height: 1.55;
+}
+.home--compact .stats dd {
+  font-size: calc(26px * var(--k));
+}
+.home--compact .stats dt {
+  font-size: calc(11px * var(--k));
+}
+.home--compact .orbit-node__label {
+  font-size: calc(14px * min(var(--k), 1.25));
+}
+.home--compact .tab-bar {
+  margin: 0 auto;
 }

@@ -8,6 +8,7 @@ import { onOrbit } from '../lib/geometry'
 import { findLibrary } from '../lib/libraries'
 import { useGeometry } from '../lib/useGeometry'
 import { useLibrary } from '../lib/useLibrary'
+import { useViewport } from '../lib/useViewport'
 import { ORBIT_WORLD_SLOTS, recordVisit } from '../lib/worlds'
 
 interface OrbitItem {
@@ -26,6 +27,7 @@ export function Home() {
   const { me, session, signOut } = useAuth()
   const { data, error } = useLibrary(library)
   const g = useGeometry('home')
+  const { w, h } = useViewport()
 
   const isMine = library === me
 
@@ -69,6 +71,8 @@ export function Home() {
     '--cy': `${g.cy}px`,
     '--k': g.scale,
     '--node': `${g.node}px`,
+    // Quick-links panel scale: a little smaller on tablets and short laptops.
+    '--hs': w < 1200 || h < 720 ? 0.8 : 1,
   } as CSSProperties
 
   const account = (
@@ -105,7 +109,14 @@ export function Home() {
       </div>
 
       {items.map((item, i) => {
-        const deg = (i - (items.length - 1) / 2) * STEP_DEG
+        // On short desktop screens, tighten the spacing so the top circle
+        // stays clear of the Library tabs and the bottom one stays on screen.
+        const maxDeg = g.compact
+          ? 90
+          : (Math.asin(Math.min(1, Math.max(0, (g.cy - 100) / g.r))) * 180) / Math.PI
+        const step =
+          items.length > 1 ? Math.min(STEP_DEG, (2 * maxDeg) / (items.length - 1)) : STEP_DEG
+        const deg = (i - (items.length - 1) / 2) * step
         const p = onOrbit(g, deg)
         return (
           <Link

@@ -93,7 +93,7 @@ export function Welcome({ change = false }: { change?: boolean }) {
         </button>
       </div>
     )
-  } else if (step === 'select' && g.compact) {
+  } else if (step === 'select' && (g.compact || g.split)) {
     panel = (
       <div className="welcome__panel">
         <p className="welcome__tagline welcome__tagline--sm">
@@ -140,17 +140,21 @@ export function Welcome({ change = false }: { change?: boolean }) {
     '--disc': `${g.rings.disc}px`,
     '--node': `${g.node}px`,
     '--k': g.scale,
+    '--panel-left': `${g.split?.left ?? 0}px`,
+    '--panel-w': `${g.split?.width ?? 0}px`,
   } as CSSProperties
 
   return (
     <main
-      className={`welcome welcome--${step}${g.compact ? ' welcome--compact' : ''}${leaving ? ' welcome--leaving' : ''}`}
+      className={`welcome welcome--${step}${g.compact ? ' welcome--compact' : ''}${
+        g.split ? ' welcome--split' : ''
+      }${leaving ? ' welcome--leaving' : ''}`}
       style={style}
     >
       <div className="welcome__brand">The Nebula</div>
       {step === 'select' && <div className="welcome__dim" aria-hidden="true" />}
 
-      {g.compact ? (
+      {g.compact || g.split ? (
         <>
           {core}
           <div className="welcome__below">{panel}</div>

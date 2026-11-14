@@ -25,8 +25,8 @@ export default function App() {
       <HashRouter>
         <Cosmos />
         <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/password" element={<Welcome change />} />
+          <Route path="/" element={<Welcome key="sign-in" />} />
+          <Route path="/password" element={<Welcome key="change" change />} />
           <Route path="/library/:name" element={<RequireReader><Home /></RequireReader>} />
           <Route path="/library/:name/new" element={<RequireReader><StartWriting /></RequireReader>} />
           <Route path="/library/:name/archive" element={<RequireReader><Archive /></RequireReader>} />
