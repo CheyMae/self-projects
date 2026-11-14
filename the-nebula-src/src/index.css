@@ -1211,7 +1211,7 @@ button:disabled {
 
 .home--compact .hero-content .display {
   white-space: nowrap;
-  font-size: calc(38px * var(--k));
+  font-size: calc(36px * var(--k));
   margin-top: 8px;
 }
 
@@ -2280,4 +2280,17 @@ button.page-icon:not(:disabled):hover {
 }
 .home--compact .tab-bar {
   margin: 0 auto;
+}
+
+/* Phone orbit: closer labels that wrap instead of running off screen. */
+.home--compact .orbit-node {
+  gap: 12px;
+}
+.home--compact .orbit-node__label {
+  white-space: normal;
+  max-width: var(--label-max, 46vw);
+  line-height: 1.3;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: break-word;
 }

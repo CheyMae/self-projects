@@ -29,12 +29,13 @@ export const WELCOME_SPLIT_BELOW_HEIGHT = 760
 export function geometry(mode: CosmosMode, w: number, h: number): Geometry {
   if (mode === 'home' || mode === 'hidden') {
     if (w < HOME_COMPACT_BELOW) {
-      // Mobile Home (Figma: 390 wide, planet centre (-50, 470), ring r = 280)
+      // Mobile Home (Figma: 390 wide, planet centre (-50, 470), ring r = 280).
+      // Nudged 14px right so the orbit circles clear "The Library" title.
       const k = Math.min(w / 390, 1.6)
       return {
         mode,
         compact: true,
-        cx: -50 * k,
+        cx: -36 * k,
         cy: 470 * k,
         r: 280 * k,
         rings: { drift: 440 * k, dashed: 383 * k, halo: 254 * k, disc: 240 * k },

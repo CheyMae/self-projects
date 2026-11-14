@@ -118,12 +118,21 @@ export function Home() {
           items.length > 1 ? Math.min(STEP_DEG, (2 * maxDeg) / (items.length - 1)) : STEP_DEG
         const deg = (i - (items.length - 1) / 2) * step
         const p = onOrbit(g, deg)
+        // On phones, let long names wrap within the space left of the screen edge.
+        const labelMax = g.compact ? Math.max(90, w - (p.x + g.node / 2 + 12) - 16) : undefined
         return (
           <Link
             key={`${library}-${item.key}`}
             to={item.to}
             className="orbit-node"
-            style={{ left: p.x, top: p.y, animationDelay: `${0.55 + i * 0.08}s` } as CSSProperties}
+            style={
+              {
+                left: p.x,
+                top: p.y,
+                animationDelay: `${0.55 + i * 0.08}s`,
+                '--label-max': labelMax ? `${labelMax}px` : undefined,
+              } as CSSProperties
+            }
           >
             <span className="orbit-node__circle">{item.icon}</span>
             <span className="orbit-node__label">{item.label}</span>
